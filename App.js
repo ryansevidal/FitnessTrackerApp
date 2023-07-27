@@ -35,3 +35,5 @@ const styles = StyleSheet.create({
 
   }
 });
+
+const bottomNavBar

@@ -1,4 +1,4 @@
-* Goals - line graphic
+* Goals - line graphic  
   * Body weight
   * Body fat percentage
   * PRs
@@ -10,7 +10,6 @@
 * Preset routines
   * PPL, upper, lower, etc.
   * Video demonstration
-
 * Progress pics
 * Track calories
   * API - Food and nutrition database
