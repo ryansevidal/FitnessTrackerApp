@@ -1,17 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import React from 'react';
+import { StatusBar } from 'react-native';
+//import { NavigationContainer } from '@react-navigation/native';
+//import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+import ProfileScreen from './ProfileScreen';
 
 export default function App() {
   return (
-    <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#00BCD4" transulucent={true} />
-
+    <>
+      <StatusBar 
+        barStyle="light-content" 
+        hidden={false}
+        backgroundColor="#ccc"
+        transulucent={true} 
+      />
+      <ProfileScreen/>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-
-});
-
-const bottomNavBar
