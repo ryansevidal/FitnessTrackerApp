@@ -14,8 +14,6 @@ import { Ionicons } from '@expo/vector-icons';
 //   const styles = StyleSheet.create({ });
 // }
 
-
-
 const Tab = createBottomTabNavigator();
 
 const Profile = () => (
