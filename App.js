@@ -50,11 +50,14 @@ const Diet = () => (
 
 const App = () => {
   return (
-      <><StatusBar
-      barStyle="light-content"
-      hidden={false}
-      backgroundColor="#ccc"
-      transulucent={true} /><ProfileScreen /><NavigationContainer>
+    <><>
+      <StatusBar
+        barStyle="light-content"
+        hidden={false}
+        backgroundColor="#ccc"
+        translucent={false} />
+      <ProfileScreen />
+    </><NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -71,7 +74,7 @@ const App = () => {
                 iconName = focused ? 'add-circle' : 'add-circle';
                 iconColor = '#37db2e';
                 iconSize = size + 30;
-                iconStyle = { position: 'absolute', bottom: 0.1 };
+                iconStyle = { position: 'absolute', bottom: 0.1};
               }
               else if (route.name === 'Routines') {
                 iconName = focused ? 'barbell' : 'barbell-outline';
@@ -82,7 +85,9 @@ const App = () => {
 
               return <Ionicons name={iconName} size={iconSize} color={iconColor} style={iconStyle} />;
             },
+            headerShown: false,
           })}
+
           tabBarOptions={{
             activeTintColor: 'blue',
             inactiveTintColor: 'gray',
