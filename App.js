@@ -54,10 +54,13 @@ const App = () => {
         hidden={false}
         backgroundColor="#ccc"
         translucent={false} />
-      <ProfileScreen />
+      
     </><NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
+            tabBarStyle: {
+              backgroundColor: '#121212'
+            },
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
               let iconColor = color;
@@ -87,13 +90,13 @@ const App = () => {
           })}
 
           tabBarOptions={{
-            activeTintColor: 'blue',
-            inactiveTintColor: 'gray',
+            activeTintColor: '#a73cd4',
+            inactiveTintColor: '#fdfbf6',
             tabBarShowLabel: false,
             tabBarShowIcon: true,
           }}
         >
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Log" component={Log} />
           <Tab.Screen name="Add" component={Add} />
           <Tab.Screen name="Routines" component={Routines} />
