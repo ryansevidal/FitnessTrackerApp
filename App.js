@@ -3,15 +3,15 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.appContainer}>
+    <><StatusBar barStyle="dark-content" hidden={false} backgroundColor="#00BCD4" transulucent={true} /><View style={styles.appContainer}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder='Your Fitness Goal'/>
-        <Button title = 'Add'/>
+        <TextInput style={styles.textInput} placeholder='Your Fitness Goal' />
+        <Button title='Add' />
       </View>
       <View>
         <Text>List of goals...</Text>
       </View>
-    </View>
+    </View></>
   );
 }
 
