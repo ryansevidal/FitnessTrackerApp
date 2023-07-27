@@ -58,6 +58,8 @@ const App = () => {
     </><NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
+            "tabBarActiveTintColor": "#a73cd4",
+            "tabBarInactiveTintColor": "#fdfbf6",
             tabBarStyle: {
               backgroundColor: '#121212'
             },
@@ -89,12 +91,6 @@ const App = () => {
             headerShown: false,
           })}
 
-          tabBarOptions={{
-            activeTintColor: '#a73cd4',
-            inactiveTintColor: '#fdfbf6',
-            tabBarShowLabel: false,
-            tabBarShowIcon: true,
-          }}
         >
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Log" component={Log} />
