@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import ExpandableGraphSection from './ExpandableGraphSection';
 
 const texts = ['Goals (Graphs)', 'Placeholder 2', 'Placeholder 3', 'Placeholder 4']
 
@@ -9,7 +10,7 @@ const ProfileScreen = () => {
         <ScrollView contentContainerStyle={styles.scrollContent}>
             {texts.map((text,index) => (
                 <View key={index}  style={styles.textWrapper}>
-                    <Text style={styles.text}>{text}</Text>
+                    <ExpandableGraphSection key={index} title={text} />
                 </View>   
             ))}
         </ScrollView>
