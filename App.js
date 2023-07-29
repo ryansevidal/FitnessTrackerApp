@@ -1,8 +1,10 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import ProfileScreen from './ProfileScreen';
+import RoutinesScreen from './RoutinesScreen';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 
@@ -15,6 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 // }
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const Profile = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -46,6 +49,13 @@ const Diet = () => (
   </View>
 );
 
+// routine presets
+const PushScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Push Screen</Text>
+  </View>
+);
+
 const App = () => {
   return (
     <><>
@@ -54,7 +64,7 @@ const App = () => {
         hidden={false}
         backgroundColor="#ccc"
         translucent={false} />
-      
+
     </><NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -77,7 +87,7 @@ const App = () => {
                 iconName = focused ? 'add-circle' : 'add-circle';
                 iconColor = '#37db2e';
                 iconSize = size + 30;
-                iconStyle = { position: 'absolute', bottom: 0.1};
+                iconStyle = { position: 'absolute', bottom: 0.1 };
               }
               else if (route.name === 'Routines') {
                 iconName = focused ? 'barbell' : 'barbell-outline';
@@ -90,12 +100,11 @@ const App = () => {
             },
             headerShown: false,
           })}
-
         >
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Log" component={Log} />
           <Tab.Screen name="Add" component={Add} />
-          <Tab.Screen name="Routines" component={Routines} />
+          <Tab.Screen name="Routines" component={RoutinesScreen} />
           <Tab.Screen name="Diet" component={Diet} />
         </Tab.Navigator>
       </NavigationContainer></>
