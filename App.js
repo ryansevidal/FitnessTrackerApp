@@ -8,6 +8,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 
+import Push from './Push';
+
+
+
 // export default function App() {
 //   return (
 //     <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#00BCD4" transulucent={true} />
@@ -17,13 +21,13 @@ import { Ionicons } from '@expo/vector-icons';
 // }
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const Stack = createStackNavigator(); 
 
-const Profile = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>add progress graphs</Text>
-  </View>
-);
+// const Profile = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>add progress graphs</Text>
+//   </View>
+// );
 
 const Log = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -37,11 +41,11 @@ const Add = () => (
   </View>
 );
 
-const Routines = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Routines Screen</Text>
-  </View>
-);
+// const Routines = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Routines Screen</Text>
+//   </View>
+// );
 
 const Diet = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -50,11 +54,11 @@ const Diet = () => (
 );
 
 // routine presets
-const PushScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Push Screen</Text>
-  </View>
-);
+// const PushScreen = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Push Screen</Text>
+//   </View>
+// );
 
 const App = () => {
   return (
@@ -108,6 +112,7 @@ const App = () => {
           <Tab.Screen name="Diet" component={Diet} />
         </Tab.Navigator>
       </NavigationContainer></>
+      
   );
 };
 

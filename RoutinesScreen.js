@@ -1,22 +1,50 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Push from './Push';
+import { NavigationContainer } from '@react-navigation/native';
+
+//import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+//const Stack = createNativeStackNavigator();
+
+// const MyStack = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="Home"
+//           component={HomeScreen}
+//           options={{title: 'Welcome'}}
+//         />
+//         <Stack.Screen name="Profile" component={ProfileScreen} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
 
 
 const texts = ['Push', 'Pull', 'Legs', 'Upper', 'Lower', 'Core', 'Cardio']
 
 const RoutinesScreen = () => {
 
-    // const buttonPress = (index) => {
-    //     Alert.alert(`Button ${texts[index]} pressed`);
-    // };
+  const navigation = useNavigation(); // Get the navigation object using the hook
 
-    const navigation = useNavigation(); // Get the navigation object using the hook
 
-    const buttonPress = (text) => {
-      navigation.navigate(text); // Navigate to the corresponding screen based on the button text
+    const buttonPress = (index) => {
+        Alert.alert(`Button ${texts[index]} pressed`);
+        // if (text === 'Push') {
+        //   navigation.navigate('Push'); // Navigate to the PushScreen when "Push" button is pressed
+        // }
+        // if (texts[index] === 'Push') {
+        //   navigation.navigate('Push'); // Navigate to the PushScreen when "Push" button is pressed
+        // }
     };
+
+
+    // const buttonPress = (text) => {
+    //   navigation.navigate(text); // Navigate to the corresponding screen based on the button text
+    // };
 
     return (
         <View style={styles.container}>
@@ -27,27 +55,42 @@ const RoutinesScreen = () => {
                 </View>
 
                 {texts.map((text,index) => (
-                    // <View key={index}  style={styles.textWrapper}>
-                    //     {/* <Text style={styles.text}>{text}</Text> */}
-                    //     <Button
-                    //         title={`Press ${text}`}
-                    //         onPress={() => buttonPress(index)}
-                    //         color='#fff'
-                    //         titleStyle={styles.buttonText}
-                    //     />
-                    // </View>   
                     <TouchableOpacity
                         key={index}
                         style={styles.textWrapper}
                         onPress={() => buttonPress(text)}
                     >
-                        <Text style={styles.buttonText}>{`Press ${text}`}</Text>
+                        <Text style={styles.buttonText}>{`${text}`}</Text>
                     </TouchableOpacity>
+                    // <Button
+                    //   key={index}
+                    //   style={styles.textWrapper}
+                    //   onPress={() => buttonPress(index)}
+                    //   title={text}
+                    //   color="#841584"
+                    // />
                 ))}
+
+                
+
+              {/* <NavigationContainer>
+                <Stack.Navigator>
+                  <Stack.Screen
+                    name="Push"
+                    component={Push}
+                    options={{title: 'Welcome'}}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer> */}
+
             </ScrollView>
         </View>
     )
 };
+
+// const Push = ( {navigation, route}) => {
+//   return <Text>this is {route.params.name}'s profile</Text>
+// }
 
 
 const styles = StyleSheet.create({
