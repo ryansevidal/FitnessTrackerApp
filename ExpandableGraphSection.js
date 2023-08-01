@@ -1,28 +1,64 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, View, Text, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Graph from './Graph';
 
-const ExpandableGraphSection = ({ title }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const ExpandableGraphSection = ({ title }) => {const [graphs, setGraphs] = useState([
+  {
+    title: 'Bodyweight',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [
+        {
+          data: [20, 45, 28, 80, 99, 43],
+          strokeWidth: 2, 
+        },
+      ],
+    },
+  },
+  {
+    title: 'Graph 2',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+          {
+            data: [30, 90, 67, 54, 79, 89],
+            strokeWidth: 2,
+          },
+        ],
+      },
+    },
+  ]);
 
-  const handlePress = () => {
-    setIsExpanded(!isExpanded);
+  const handleAddGraph = () => {
+    const newGraph = {
+      title: `Graph ${graphs.length + 1}`,
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+          {
+            data: [50, 100, 60, 70, 80, 90],
+            strokeWidth: 2, 
+          },
+        ],
+      },
+    };
+    setGraphs([...graphs, newGraph]);
   };
 
   return (
     <View>
-      <TouchableOpacity onPress={handlePress} style={{ padding: 10, backgroundColor: '#a37cf4', borderRadius: 20, marginBottom: 10 }}>
+      <View style={{ backgroundColor: '#a37cf4', borderRadius: 20, marginBottom: 5 }}>
         <Text style={{ color: '#fdfbf6', fontSize: 24, fontWeight: 'bold', marginBottom: 10 }}>{title}</Text>
-      </TouchableOpacity>
-      {isExpanded && (
-        <ScrollView horizontal>
-          {/* Here you can map over your data to create as many graphs as you want */}
-          <Graph title="Graph 1" />
-          <Graph title="Graph 2" />
-          <Graph title="Graph 3" />
-          {/* ... */}
-        </ScrollView>
-      )}
+      </View>
+      <ScrollView horizontal>
+        {graphs.map((graph, index) => (
+          <Graph key={index} title={graph.title} data={graph.data} />
+        ))}
+        <TouchableOpacity style={{ justifyContent: 'center', padding: 10 }} onPress={handleAddGraph}>
+          <Icon name="plus" size={24} color="#ecffff" />
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
