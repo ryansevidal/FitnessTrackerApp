@@ -8,9 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 
-import Push from './Push';
-
-
+import DietScreen from './DietScreen';
 
 // export default function App() {
 //   return (
@@ -109,7 +107,7 @@ const App = () => {
           <Tab.Screen name="Log" component={Log} />
           <Tab.Screen name="Add" component={Add} />
           <Tab.Screen name="Routines" component={RoutinesScreen} />
-          <Tab.Screen name="Diet" component={Diet} />
+          <Tab.Screen name="Diet" component={DietScreen} />
         </Tab.Navigator>
       </NavigationContainer></>
       
