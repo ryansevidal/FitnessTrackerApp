@@ -7,14 +7,14 @@ const texts = ['Goals', 'Placeholder 2', 'Placeholder 3', 'Placeholder 4']
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-            {texts.map((text,index) => (
-                <View key={index}  style={styles.textWrapper}>
-                    <Text style={styles.text}>{text}</Text>
-                    {text === 'Goals' && <ExpandableGraphSection />}
-                </View>   
-            ))}
-        </ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {texts.map((text, index) => (
+          <View key={index} style={styles.textWrapper}>
+            <Text style={styles.text}>{text}</Text>
+            {text === 'Goals' && <ExpandableGraphSection />}
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
