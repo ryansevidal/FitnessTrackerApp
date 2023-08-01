@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Push from './Push';
+// import PushScreen from './Push';
 import { NavigationContainer } from '@react-navigation/native';
+import Push from './Push';
 
 //import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -32,13 +33,13 @@ const RoutinesScreen = () => {
 
 
     const buttonPress = (index) => {
-        Alert.alert(`Button ${texts[index]} pressed`);
+        // Alert.alert(`Button ${texts[index]} pressed`);
         // if (text === 'Push') {
         //   navigation.navigate('Push'); // Navigate to the PushScreen when "Push" button is pressed
         // }
-        // if (texts[index] === 'Push') {
-        //   navigation.navigate('Push'); // Navigate to the PushScreen when "Push" button is pressed
-        // }
+        if (texts[index] === 'Push') {
+          navigation.navigate('Push'); // Navigate to the Push when "Push" button is pressed
+        }
     };
 
 
