@@ -91,6 +91,13 @@ const ExpandableGraphSection = ({ title }) => {
     saveData([...graphs, newGraph]);
   };
 
+  const handleAddData = (index, date, value) => {
+    const newGraphs = [...graphs];
+    newGraphs[index].data.datasets[0].data.push({ x: date, y: value });
+    setGraphs(newGraphs);
+    saveData(newGraphs);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await loadData();
@@ -108,7 +115,7 @@ const ExpandableGraphSection = ({ title }) => {
       </View>
       <ScrollView horizontal>
         {graphs.map((graph, index) => (
-          <Graph key={index} title={graph.title} data={graph.data} onDelete={() => handleDeleteGraph(index)} />
+          <Graph key={index} title={graph.title} data={graph.data} onDelete={() => handleDeleteGraph(index)} onAdd={(date, value) => handleAddData(index, date, value)} />
         ))}
         <TouchableOpacity style={{ justifyContent: 'center', padding: 10 }} onPress={handleAddGraph}>
           <Icon name="plus" size={24} color="#ecffff" />
