@@ -8,10 +8,9 @@ const chartConfig = {
   backgroundGradientFrom: '#1E2923',
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: '#08130D',
-  backgroundGradientToOpacity: 0.25,
+  backgroundGradientToOpacity: 0.05,
   color: (opacity = 1) => `rgba(236, 255, 255, ${opacity})`,
   strokeWidth: 2,
-  barPercentage: 0.5,
   useShadowColorFromDataset: false,
 };
 
@@ -28,31 +27,30 @@ const Graph = ({ title, data, onDelete, onAdd }) => {
     onAdd(date, value);
   };
 
-  console.log(data);
-
   return (
-    <View>
+    <View style={{ width: screenWidth - 55 }}>
       <View style={{ flexDirection: 'row' }}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10, color: '#ecffff' }}>{title}</Text>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ width: screenWidth - 108}}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 3, marginBottom: 10, color: '#ecffff' }}>{title}</Text>
+        </View>
+        <View style={{ width: screenWidth, flexDirection: 'row' }}>
           <TouchableOpacity onPress={handleOpenModal}>
-            <Icon name="plus" size={24} color="#ecffff" style={{ paddingLeft: 185 }} />
+            <Icon name="plus" size={24} color="#ecffff" style={{ marginRight: 9 }} />
+          </TouchableOpacity>
+          <TouchableOpacity style={{}} onPress={onDelete}>
+            <Icon name="trash" size={24} color="#ecffff" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={{ paddingLeft: 9 }} onPress={onDelete}>
-          <Icon name="trash" size={24} color="#ecffff" />
-        </TouchableOpacity>
-
       </View>
       {data.datasets[0].data.length === 0 ? (
-        <Text style={{ color: '#ecffff', textAlign: 'center', marginTop: 40, marginBottom: 65, fontSize: 16 }}>No data available. Tap "+" to add data.</Text>
+        <Text style={{ color: '#ecffff', textAlign: 'center', margin: 40, fontSize: 16 }}>No data available. Tap "+" to add data.</Text>
       ) : (
         <LineChart
           data={data}
-          width={screenWidth - 40}
+          width={screenWidth - 55}
           height={220}
           chartConfig={chartConfig}
-          style={{ overflow: 'hidden' }}
+          style={{ borderRadius: 20, overflow: 'hidden' }}
         />
       )}
       <DataInputModal isVisible={isModalVisible} onClose={handleCloseModal} onSubmit={handleAddData} />

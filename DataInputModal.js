@@ -24,6 +24,7 @@ const DataInputModal = ({ isVisible, onClose, onSubmit }) => {
     }
     onSubmit(date, parseFloat(value));
     setValue('');
+    onClose();
   };
 
   return (

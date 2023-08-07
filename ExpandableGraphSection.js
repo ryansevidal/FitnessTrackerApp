@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Graph from './Graph';
@@ -11,6 +11,8 @@ const ExpandableGraphSection = ({ title }) => {
 
   const handleOpenTitleModal = () => setTitleModalVisible(true);
   const handleCloseTitleModal = () => setTitleModalVisible(false);
+
+  const screenWidth = Dimensions.get('window').width;
 
   const [graphs, setGraphs] = useState([
     {
@@ -110,22 +112,32 @@ const ExpandableGraphSection = ({ title }) => {
     fetchData();
   }, []);
 
+  const itemStyle = {
+    height: 260,
+    width: screenWidth - 55,
+    marginRight: 10,
+    justifyContent: 'space-between',
+  }
+
   return (
     <View>
       <View style={{ backgroundColor: '#a37cf4', borderRadius: 20, marginBottom: 5 }}>
         <Text style={{ color: '#fdfbf6', fontSize: 24, fontWeight: 'bold', marginBottom: 10 }}>{title}</Text>
       </View>
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={true}>
         {graphs.map((graph, index) => (
-          <Graph key={index} title={graph.title} data={graph.data} onDelete={() => handleDeleteGraph(index)} onAdd={(date, value) => handleAddData(index, date, value)} />
+          <View key={index} style={itemStyle}>
+            <Graph title={graph.title} data={graph.data} onDelete={() => handleDeleteGraph(index)} onAdd={(date, value) => handleAddData(index, date, value)} />
+          </View>
         ))}
         <TouchableOpacity style={{ justifyContent: 'center', padding: 10 }} onPress={handleOpenTitleModal}>
           <Icon name="plus" size={24} color="#ecffff" />
         </TouchableOpacity>
-        <GraphTitleModal isVisible={isTitleModalVisible} onClose={handleCloseTitleModal} onSubmit={handleAddGraph} />
       </ScrollView>
+      <GraphTitleModal isVisible={isTitleModalVisible} onClose={handleCloseTitleModal} onSubmit={handleAddGraph} />
     </View>
   );
 };
+
 
 export default ExpandableGraphSection;
