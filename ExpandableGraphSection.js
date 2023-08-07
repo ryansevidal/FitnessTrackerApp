@@ -3,34 +3,35 @@ import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Graph from './Graph';
+import GraphTitleModal from './GraphTitleModal';
 
 const ExpandableGraphSection = ({ title }) => {
+
+  const [isTitleModalVisible, setTitleModalVisible] = useState(false);
+
+  const handleOpenTitleModal = () => setTitleModalVisible(true);
+  const handleCloseTitleModal = () => setTitleModalVisible(false);
+
   const [graphs, setGraphs] = useState([
     {
       title: 'Bodyweight',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        labels: [],
         datasets: [
           {
-            data: [20, 45, 28, 80, 99, 43],
-            strokeWidth: 2,
-          },
-        ],
-      },
-    },
-    {
-      title: 'Graph 2',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-        datasets: [
-          {
-            data: [30, 90, 67, 54, 79, 89],
+            data: [],
             strokeWidth: 2,
           },
         ],
       },
     },
   ]);
+
+  const resetGraphs = () => {
+    setGraphs(initialGraphs);
+    saveData(initialGraphs); // This will overwrite the saved data with the initial state
+  };
+
 
   const saveData = async (value) => {
     try {
@@ -74,14 +75,14 @@ const ExpandableGraphSection = ({ title }) => {
     );
   };
 
-  const handleAddGraph = () => {
+  const handleAddGraph = (title) => {
     const newGraph = {
-      title: `Graph ${graphs.length + 1}`,
+      title: title,
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        labels: [],
         datasets: [
           {
-            data: [50, 100, 60, 70, 80, 90],
+            data: [],
             strokeWidth: 2,
           },
         ],
@@ -93,7 +94,8 @@ const ExpandableGraphSection = ({ title }) => {
 
   const handleAddData = (index, date, value) => {
     const newGraphs = [...graphs];
-    newGraphs[index].data.datasets[0].data.push({ x: date, y: value });
+    newGraphs[index].data.labels.push(date.toLocaleDateString());
+    newGraphs[index].data.datasets[0].data.push(value);
     setGraphs(newGraphs);
     saveData(newGraphs);
   };
@@ -117,9 +119,10 @@ const ExpandableGraphSection = ({ title }) => {
         {graphs.map((graph, index) => (
           <Graph key={index} title={graph.title} data={graph.data} onDelete={() => handleDeleteGraph(index)} onAdd={(date, value) => handleAddData(index, date, value)} />
         ))}
-        <TouchableOpacity style={{ justifyContent: 'center', padding: 10 }} onPress={handleAddGraph}>
+        <TouchableOpacity style={{ justifyContent: 'center', padding: 10 }} onPress={handleOpenTitleModal}>
           <Icon name="plus" size={24} color="#ecffff" />
         </TouchableOpacity>
+        <GraphTitleModal isVisible={isTitleModalVisible} onClose={handleCloseTitleModal} onSubmit={handleAddGraph} />
       </ScrollView>
     </View>
   );

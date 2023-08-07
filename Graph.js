@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, Text, View, TouchableOpacity } from 'react-native';
+import { Dimensions, Text, View, TouchableOpacity, Button } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DataInputModal from './DataInputModal';
@@ -28,27 +28,33 @@ const Graph = ({ title, data, onDelete, onAdd }) => {
     onAdd(date, value);
   };
 
+  console.log(data);
+
   return (
     <View>
       <View style={{ flexDirection: 'row' }}>
         <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10, color: '#ecffff' }}>{title}</Text>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={handleOpenModal}>
-            <Icon name="plus" size={24} color="#ecffff" style={{ marginRight: 15 }} />
+            <Icon name="plus" size={24} color="#ecffff" style={{ paddingLeft: 185 }} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={{ paddingLeft: 9 }} onPress={onDelete}>
           <Icon name="trash" size={24} color="#ecffff" />
         </TouchableOpacity>
+
       </View>
-      <LineChart
-        data={data}
-        width={screenWidth - 40}
-        height={220}
-        chartConfig={chartConfig}
-        style={{ overflow: 'hidden' }}
-      //bezier
-      />
+      {data.datasets[0].data.length === 0 ? (
+        <Text style={{ color: '#ecffff', textAlign: 'center', marginTop: 40, marginBottom: 65, fontSize: 16 }}>No data available. Tap "+" to add data.</Text>
+      ) : (
+        <LineChart
+          data={data}
+          width={screenWidth - 40}
+          height={220}
+          chartConfig={chartConfig}
+          style={{ overflow: 'hidden' }}
+        />
+      )}
       <DataInputModal isVisible={isModalVisible} onClose={handleCloseModal} onSubmit={handleAddData} />
     </View>
   );
