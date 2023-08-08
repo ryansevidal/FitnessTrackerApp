@@ -18,6 +18,7 @@ const GraphTitleModal = ({ isVisible, onClose, onSubmit }) => {
     <Modal visible={isVisible} onRequestClose={onClose} transparent>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Track New Progress</Text>
           <TextInput
             value={title}
             placeholder="Enter a title"
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   modalContent: {
     width: '80%',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#fdfbf6',
     borderRadius: 15,
     alignItems: 'center',
     shadowColor: "#000",
@@ -59,6 +60,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#121212'
   },
   input: {
     width: '100%',
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#fdfbf6',
     fontWeight: 'bold',
   }
 });
