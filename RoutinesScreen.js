@@ -1,20 +1,31 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import GraphTitleModal from './GraphTitleModal';
+import EditRoutineScreen from './EditRoutineScreen'; 
 const Stack = createStackNavigator();
 
 const texts = ['Push', 'Pull', 'Legs', 'Chest/Back', 'Shoulders/Arms', 'Core', 'Cardio', 'Add Routine']
 
-const RoutinesHomeScreen = ({ navigation }) => {
+const RoutinesHomeScreen = ({ navigation, route }) => {
+
+  const [routineButtons, setRoutineButtons] = useState(texts);
+  useEffect(() => {
+    const newRoutine = route.params?.newRoutine;
+    if (newRoutine) {
+      setRoutineButtons([...routineButtons, newRoutine.title]);
+    }
+  }, [route.params?.newRoutine]);
+
   const handleButtonPress = (routine) => {
     if (routine === 'Add Routine') {
-      navigation.navigate('CustomRoutine', { handleAddRoutine });
+      navigation.navigate('AddRoutineScreen');
     }
     else {
       navigation.navigate(routine);
     }
   };
+
   return (
     <View style={styles.container}>
       {/* Adds the text at the top */}
@@ -24,7 +35,6 @@ const RoutinesHomeScreen = ({ navigation }) => {
       <ScrollView>
         {texts.map((routine, index) => (
           <TouchableOpacity
-              // style={styles.textWrapper}
               style={routine === 'Add Routine' ? styles.plusButton : styles.textWrapper}
               onPress={() => handleButtonPress(routine)}
               key={index} // Don't forget to add a unique key
@@ -35,13 +45,12 @@ const RoutinesHomeScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         ))}
-
       </ScrollView>
     </View>
   );
 };
 
-const Custom = () => (
+const Push = ({ navigation }) => (
   <View style={styles.container}>
     <Text style={styles.text}>Push</Text>
     <ScrollView>
@@ -55,23 +64,12 @@ const Custom = () => (
         {/* Add more routines as needed */}
       </View>
     </ScrollView>
-  </View>
-);
-
-const Push = () => (
-  <View style={styles.container}>
-    <Text style={styles.text}>Push</Text>
-    <ScrollView>
-      <View style={styles.routinesList}>
-        <Text style={styles.routineItem}>Bench Press</Text>
-        <Text style={styles.routineItem}>Shoulder Press</Text>
-        <Text style={styles.routineItem}>Dips</Text>
-        <Text style={styles.routineItem}>Incline Dumbell Press</Text>
-        <Text style={styles.routineItem}>Lateral Raises</Text>
-        <Text style={styles.routineItem}>Tricep Pulldown</Text>
-        {/* Add more routines as needed */}
-      </View>
-    </ScrollView>
+    <TouchableOpacity
+      style={styles.editButton}
+      onPress={() => navigation.navigate('EditRoutineScreen', { routineName: 'Push' })}
+    >
+      <Text style={styles.text}>Edit</Text>
+    </TouchableOpacity>
   </View>
 );
 
@@ -172,6 +170,74 @@ const Cardio = () => (
   </View>
 );
 
+const AddRoutineScreen = ({ navigation }) => {
+
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [exerciseDetails, setExerciseDetails] = useState({ title: '', description: '' });
+  const [submittedExercises, setSubmittedExercises] = useState([]); // New state for submitted exercises
+
+  const handleAddExercise = () => {
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
+  const handleExerciseSubmit = (title, description) => {
+    // Update the submitted exercises array with the new exercise
+    const newExercise = { title, description };
+    setSubmittedExercises([...submittedExercises, newExercise]);
+
+    setExerciseDetails({ title, description });
+    setModalVisible(false);
+  };
+
+  const [routineName, setRoutineName] = useState('');
+
+  const handleSaveRoutine = () => {
+    if (routineName && submittedExercises.length > 0) {
+      const newRoutine = { title: routineName, exercises: submittedExercises };
+      navigation.navigate('RoutinesHomeScreen', { newRoutine }); // Pass the newRoutine object
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+
+      <Text style={styles.text}>Routine Title:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setRoutineName}
+          value={routineName}
+          placeholder="Enter routine title"
+        />
+
+        {/* Render submitted exercises as a list */}
+        {submittedExercises.map((exercise, index) => (
+          <View key={index} style={styles.exerciseListItem}>
+            <Text style={styles.exerciseTitle}>{exercise.title}</Text>
+            <Text style={styles.exerciseDescription}>{exercise.description}</Text>
+          </View>
+        ))}
+
+        {/* Add Exercise button */}
+        <TouchableOpacity style={styles.plusButton} onPress={handleAddExercise}>
+          <Text style={styles.plusButtonText}>+</Text>
+        </TouchableOpacity>
+
+        {/* Modal */}
+        <GraphTitleModal
+          isVisible={isModalVisible}
+          onClose={handleCloseModal}
+          onSubmit={handleExerciseSubmit}
+        />
+      </ScrollView>
+    </View>
+  );
+};
+
 const RoutinesScreen = () => {
   return (
     <View style={styles.container}>
@@ -183,9 +249,9 @@ const RoutinesScreen = () => {
           options={{ headerShown: false }}
           />
           <Stack.Screen
-          name="Custom"
-          component={Custom}
-          options={{ headerShown: true }}
+          name="AddRoutineScreen"
+          component={AddRoutineScreen}
+          options={{ headerShown: true, title: 'Add Custom Routine' }}
           />
           <Stack.Screen
           name="Push"
@@ -221,6 +287,11 @@ const RoutinesScreen = () => {
           name="Cardio"
           component={Cardio}
           options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="EditRoutineScreen"
+            component={EditRoutineScreen}
+            options={{ headerShown: true, title: 'Edit Routine' }}
           />
         </Stack.Navigator>
       </ScrollView>
@@ -302,6 +373,40 @@ const RoutinesScreen = () => {
       color: 'white',
       fontSize: 24,
       fontWeight: 'bold',
+    },
+    input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      backgroundColor: 'white',
+    },
+    exerciseListItem: {
+      backgroundColor: '#2c2c2c',
+      borderRadius: 10,
+      padding: 10,
+      marginVertical: 5,
+    },
+    exerciseTitle: {
+      color: '#ffffff',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+    exerciseDescription: {
+      color: '#ffffff',
+      fontSize: 16,
+    },
+    editButton: {
+      backgroundColor: '#a37cf4',
+      paddingVertical: 5, // Adjust padding vertically
+      paddingHorizontal: 10, // Adjust padding horizontally
+      borderRadius: 15, // Adjust border radius
+      width: 80, // Set the width
+      marginLeft: 'auto', // Center horizontally
+      marginRight: 'auto', // Center horizontally
+      marginBottom: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
 });
 
