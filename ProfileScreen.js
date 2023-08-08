@@ -1,18 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import ExpandableGraphSection from './ExpandableGraphSection';
 
-const texts = ['Goals (Graphs)', 'Placeholder 2', 'Placeholder 3', 'Placeholder 4']
+const texts = ['Progress', 'Activity', 'Placeholder 3', 'Placeholder 4']
 
 const ProfileScreen = () => {
   return (
     <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-            {texts.map((text,index) => (
-                <View key={index}  style={styles.textWrapper}>
-                    <Text style={styles.text}>{text}</Text>
-                </View>   
-            ))}
-        </ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {texts.map((text, index) => (
+          <View key={index} style={styles.textWrapper}>
+            <Text style={styles.text}>{text}</Text>
+            {text === 'Progress' && <ExpandableGraphSection />}
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -26,8 +28,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingVertical: 70,
-    justifyContent: 'top',
-    
   },
   textWrapper: {
     backgroundColor: '#a37cf4',
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     color: '#fdfbf6',
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
 });
 
