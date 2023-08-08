@@ -30,12 +30,12 @@ const Graph = ({ title, data, onDelete, onAdd }) => {
   return (
     <View style={{ width: screenWidth - 55 }}>
       <View style={{ flexDirection: 'row' }}>
-        <View style={{ width: screenWidth - 108 }}>
+        <View style={{ width: screenWidth - 108}}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 3, marginBottom: 10, color: '#ecffff' }}>{title}</Text>
         </View>
         <View style={{ width: screenWidth, flexDirection: 'row' }}>
           <TouchableOpacity onPress={handleOpenModal}>
-            <Icon name="pencil" size={24} color="#ecffff" style={{ marginRight: 9 }} />
+            <Icon name="plus" size={24} color="#ecffff" style={{ marginRight: 9 }} />
           </TouchableOpacity>
           <TouchableOpacity style={{}} onPress={onDelete}>
             <Icon name="trash" size={24} color="#ecffff" />
@@ -43,11 +43,7 @@ const Graph = ({ title, data, onDelete, onAdd }) => {
         </View>
       </View>
       {data.datasets[0].data.length === 0 ? (
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 40 }}>
-          <Text style={{ color: '#ecffff', textAlign: 'center', fontSize: 16, marginRight: 3 }}>No data available. Tap </Text>
-          <Icon name="pencil" size={18} color="#ecffff" />
-          <Text style={{ color: '#ecffff', textAlign: 'center', fontSize: 16, marginLeft: 3 }}> to add data.</Text>
-        </View>
+        <Text style={{ color: '#ecffff', textAlign: 'center', margin: 40, fontSize: 16 }}>No data available. Tap "+" to add data.</Text>
       ) : (
         <LineChart
           data={data}
