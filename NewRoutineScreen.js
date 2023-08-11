@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Text, SafeAreaView, ScrollView } from 'react-native';
 
-const NewRoutineScreen = ({ navigation }) => {
+const NewRoutineScreen = ({ navigation, route }) => {
 
   const [exercises, setExercises] = useState([]);
+
+  useEffect(() => {
+    if (route.params?.newExercise) {
+      setExercises(prevExercises => [...prevExercises, route.params.newExercise]);
+    }
+  }, [route.params?.newExercise]);
 
   return (
     <View style={styles.container}>
