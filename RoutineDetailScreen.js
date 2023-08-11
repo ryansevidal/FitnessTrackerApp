@@ -2,13 +2,14 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { deleteRoutine } from './routinesData'; // Adjust the import path
 
-const RoutineDetailScreen = ({ route }) => {
+const RoutineDetailScreen = ({ route, navigation }) => {
   const { routine } = route.params;
 
   const handleDelete = () => {
     // Call the deleteRoutine function from routinesData.js
     deleteRoutine(routine.title); // Make sure you imported the function
     // Navigate back to the RoutinesScreen or refresh the screen
+    navigation.goBack();
   };
 
   return (

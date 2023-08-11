@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Button, StyleSheet } from 'react-native';
+import { View, ScrollView, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { getPreexistingRoutines, getAllRoutines } from './routinesData';
 
 const RoutinesScreen = ({ navigation }) => {
@@ -29,16 +29,24 @@ const RoutinesScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
-      {allRoutines.map((routine, index) => (
-        <Button
-          key={index}
-          title={routine.title}
-          onPress={() => navigateToRoutineDetail(routine)}
-        />
-      ))}
-      <Button title="Create New Routine" onPress={navigateToCreateRoutine} />
-    </ScrollView>
+    <View style={styles.container}>
+        <ScrollView>
+        {allRoutines.map((routine, index) => (
+          <TouchableOpacity
+            style={styles.textWrapper}
+            onPress={() => navigateToRoutineDetail(routine)}
+          >
+            <Text style={styles.buttonText}>{routine.title}</Text>
+          </TouchableOpacity>
+        ))}
+        <TouchableOpacity
+          style={[styles.textWrapper, styles.addButton]}
+          onPress={navigateToCreateRoutine}
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -49,48 +57,29 @@ const styles = StyleSheet.create({
       paddingBottom: 0, // Adjust this value to extend to the navigation bar
       backgroundColor: '#121212',
     },
-    headerContainer: {
-      flex: 1,
-      padding: 0,
-      backgroundColor: '#121212',
-    },
-    scrollContent: {
-      flexGrow: 1,
-      paddingVertical: 70,
-      justifyContent: 'flex-start',
-      paddingTop: 30,
-    },
-    headerWrapper: {
-      alignItems: 'center',
-      marginTop: 0,
-      marginBottom: 20,
-    },
-    headerText: {
-      color: '#ffffff',
-      fontSize: 32,
-      fontWeight: 'bold',
-    },
     textWrapper: {
+      width: '60%',
       backgroundColor: '#a37cf4',
-      padding: 10,
+      padding: 5,
       borderRadius: 20,
       marginBottom: 10,
+      alignSelf: 'center',
       alignItems: 'center',
       justifyContent: 'center',
     },
-    text: {
-      color: '#fdfbf6',
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 10,
-    },
     buttonText: {
       color: '#fdfbf6',
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: 'bold',
       marginBottom: 10,
       marginTop: 10,
-    },
+    },    
+    addButton: {
+        backgroundColor: '#a37cf4',
+        width: 56,
+        height: 56,
+        borderRadius: 28,
+      },
 });
 
 export default RoutinesScreen;
@@ -454,23 +443,23 @@ export default RoutinesScreen;
 //       fontSize: 18,
 //       marginBottom: 10,
 //     },
-//     plusButton: {
-//       width: 56,
-//       height: 56,
-//       borderRadius: 28,
-//       backgroundColor: '#a37cf4', // Change to your desired color
-//       justifyContent: 'center',
-//       alignItems: 'center',
-//       elevation: 5,
-//       marginBottom: 10,
-//       marginLeft: 'auto', // This will center the button horizontally
-//       marginRight: 'auto', // This will center the button horizontally
-//     },
-//     plusButtonText: {
-//       color: 'white',
-//       fontSize: 24,
-//       fontWeight: 'bold',
-//     },
+    // plusButton: {
+    //   width: 56,
+    //   height: 56,
+    //   borderRadius: 28,
+    //   backgroundColor: '#a37cf4', // Change to your desired color
+    //   justifyContent: 'center',
+    //   alignItems: 'center',
+    //   elevation: 5,
+    //   marginBottom: 10,
+    //   marginLeft: 'auto', // This will center the button horizontally
+    //   marginRight: 'auto', // This will center the button horizontally
+    // },
+    // plusButtonText: {
+    //   color: 'white',
+    //   fontSize: 24,
+    //   fontWeight: 'bold',
+    // },
 //     input: {
 //       height: 40,
 //       margin: 12,
