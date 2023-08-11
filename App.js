@@ -5,6 +5,8 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
+import LogScreen from './LogScreen';
+import AddScreen from './AddScreen';
 
 // export default function App() {
 //   return (
@@ -75,9 +77,9 @@ const App = () => {
                 iconName = focused ? 'stats-chart' : 'stats-chart-outline';
               } else if (route.name === 'Add') {
                 iconName = focused ? 'add-circle' : 'add-circle';
-                iconColor = '#37db2e';
+                iconColor = '#a37cd4';
                 iconSize = size + 30;
-                iconStyle = { position: 'absolute', bottom: 0.1};
+                iconStyle = { position: 'absolute', bottom: 0.1, opacity: 1};
               }
               else if (route.name === 'Routines') {
                 iconName = focused ? 'barbell' : 'barbell-outline';
@@ -93,8 +95,8 @@ const App = () => {
 
         >
           <Tab.Screen name="Profile" component={ProfileScreen} />
-          <Tab.Screen name="Log" component={Log} />
-          <Tab.Screen name="Add" component={Add} />
+          <Tab.Screen name="Log" component={LogScreen} />
+          <Tab.Screen name="Add" component={AddScreen} />
           <Tab.Screen name="Routines" component={Routines} />
           <Tab.Screen name="Diet" component={Diet} />
         </Tab.Navigator>
