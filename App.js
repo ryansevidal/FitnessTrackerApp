@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 import LogScreen from './LogScreen';
 import AddScreen from './AddScreen';
+import AppNavigator from './AppNavigator';
 
 // export default function App() {
 //   return (
@@ -56,7 +57,7 @@ const App = () => {
         hidden={false}
         backgroundColor="#ccc"
         translucent={false} />
-      
+
     </><NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -79,7 +80,7 @@ const App = () => {
                 iconName = focused ? 'add-circle' : 'add-circle';
                 iconColor = '#a37cd4';
                 iconSize = size + 30;
-                iconStyle = { position: 'absolute', bottom: 0.1, opacity: 1};
+                iconStyle = { position: 'absolute', bottom: 0.1, opacity: 1 };
               }
               else if (route.name === 'Routines') {
                 iconName = focused ? 'barbell' : 'barbell-outline';
@@ -96,7 +97,7 @@ const App = () => {
         >
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Log" component={LogScreen} />
-          <Tab.Screen name="Add" component={AddScreen} />
+          <Tab.Screen name="Add" component={AppNavigator} /> 
           <Tab.Screen name="Routines" component={Routines} />
           <Tab.Screen name="Diet" component={Diet} />
         </Tab.Navigator>

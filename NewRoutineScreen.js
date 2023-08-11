@@ -12,7 +12,7 @@ const NewRoutineScreen = ({ navigation }) => {
       <TextInput style={styles.input} />
       <Text style={styles.label}>Notes:</Text>
       <TextInput style={styles.input} multiline />
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddExerciseScreen')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddExercise')}>
         <Text style={styles.buttonText}>Add Exercise</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => { /* Finish routine and save to logs */ }}>
