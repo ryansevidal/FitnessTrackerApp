@@ -9,6 +9,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
 
 import DietScreen from './DietScreen';
+import RoutineDetailScreen from './RoutineDetailScreen';
+import CreateRoutineScreen from './CreateRoutineScreen';
 
 // export default function App() {
 //   return (
@@ -19,7 +21,17 @@ import DietScreen from './DietScreen';
 // }
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator(); 
+// const Stack = createStackNavigator(); 
+
+const RoutinesStack = createStackNavigator();
+
+const RoutinesStackScreen = () => (
+  <RoutinesStack.Navigator>
+    <RoutinesStack.Screen name="Routines" component={RoutinesScreen} />
+    <RoutinesStack.Screen name="RoutineDetailScreen" component={RoutineDetailScreen} />
+    <RoutinesStack.Screen name="CreateRoutineScreen" component={CreateRoutineScreen} />
+  </RoutinesStack.Navigator>
+);
 
 // const Profile = () => (
 //   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -106,7 +118,7 @@ const App = () => {
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Log" component={Log} />
           <Tab.Screen name="Add" component={Add} />
-          <Tab.Screen name="Routines" component={RoutinesScreen} />
+          <Tab.Screen name="Routines" component={RoutinesStackScreen} />
           <Tab.Screen name="Diet" component={DietScreen} />
         </Tab.Navigator>
       </NavigationContainer></>
