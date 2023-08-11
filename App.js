@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { ImageBackgroundBase, StatusBar } from 'react-native';
 import ProfileScreen from './ProfileScreen';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -77,7 +77,7 @@ const App = () => {
                 iconName = focused ? 'add-circle' : 'add-circle';
                 iconColor = '#37db2e';
                 iconSize = size + 30;
-                iconStyle = { position: 'absolute', bottom: 0.1};
+                iconStyle = { position: 'absolute', alignSelf: 'center', bottom: -1, left: 12, backgroundColor: '#121212', padding: 0 };
               }
               else if (route.name === 'Routines') {
                 iconName = focused ? 'barbell' : 'barbell-outline';
