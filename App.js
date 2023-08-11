@@ -1,10 +1,16 @@
 import React from 'react';
 import { ImageBackgroundBase, StatusBar } from 'react-native';
 import ProfileScreen from './ProfileScreen';
+import RoutinesScreen from './RoutinesScreen';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons';
+
+import DietScreen from './DietScreen';
+import RoutineDetailScreen from './RoutineDetailScreen';
+import CreateRoutineScreen from './CreateRoutineScreen';
 
 // export default function App() {
 //   return (
@@ -15,12 +21,23 @@ import { Ionicons } from '@expo/vector-icons';
 // }
 
 const Tab = createBottomTabNavigator();
+// const Stack = createStackNavigator(); 
 
-const Profile = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>add progress graphs</Text>
-  </View>
+const RoutinesStack = createStackNavigator();
+
+const RoutinesStackScreen = () => (
+  <RoutinesStack.Navigator>
+    <RoutinesStack.Screen name="Routines" component={RoutinesScreen} />
+    <RoutinesStack.Screen name="RoutineDetailScreen" component={RoutineDetailScreen} options={{ headerShown: false }}/>
+    <RoutinesStack.Screen name="CreateRoutineScreen" component={CreateRoutineScreen} />
+  </RoutinesStack.Navigator>
 );
+
+// const Profile = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>add progress graphs</Text>
+//   </View>
+// );
 
 const Log = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -34,17 +51,24 @@ const Add = () => (
   </View>
 );
 
-const Routines = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Routines Screen</Text>
-  </View>
-);
+// const Routines = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Routines Screen</Text>
+//   </View>
+// );
 
 const Diet = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Diet Screen</Text>
   </View>
 );
+
+// routine presets
+// const PushScreen = () => (
+//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text>Push Screen</Text>
+//   </View>
+// );
 
 const App = () => {
   return (
@@ -54,7 +78,7 @@ const App = () => {
         hidden={false}
         backgroundColor="#ccc"
         translucent={false} />
-      
+
     </><NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -77,6 +101,7 @@ const App = () => {
                 iconName = focused ? 'add-circle' : 'add-circle';
                 iconColor = '#37db2e';
                 iconSize = size + 30;
+                iconStyle = { position: 'absolute', bottom: 0.1 };
                 iconStyle = { position: 'absolute', alignSelf: 'center', bottom: -1, left: 12, backgroundColor: '#121212', padding: 0 };
               }
               else if (route.name === 'Routines') {
@@ -90,15 +115,15 @@ const App = () => {
             },
             headerShown: false,
           })}
-
         >
           <Tab.Screen name="Profile" component={ProfileScreen} />
           <Tab.Screen name="Log" component={Log} />
           <Tab.Screen name="Add" component={Add} />
-          <Tab.Screen name="Routines" component={Routines} />
-          <Tab.Screen name="Diet" component={Diet} />
+          <Tab.Screen name="Routines" component={RoutinesStackScreen} />
+          <Tab.Screen name="Diet" component={DietScreen} />
         </Tab.Navigator>
       </NavigationContainer></>
+      
   );
 };
 
