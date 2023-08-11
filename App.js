@@ -28,7 +28,7 @@ const RoutinesStack = createStackNavigator();
 const RoutinesStackScreen = () => (
   <RoutinesStack.Navigator>
     <RoutinesStack.Screen name="Routines" component={RoutinesScreen} />
-    <RoutinesStack.Screen name="RoutineDetailScreen" component={RoutineDetailScreen} />
+    <RoutinesStack.Screen name="RoutineDetailScreen" component={RoutineDetailScreen} options={{ headerShown: false }}/>
     <RoutinesStack.Screen name="CreateRoutineScreen" component={CreateRoutineScreen} />
   </RoutinesStack.Navigator>
 );
