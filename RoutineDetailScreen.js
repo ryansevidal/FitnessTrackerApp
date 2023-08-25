@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { deleteRoutine } from './routinesData';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -24,8 +24,12 @@ const RoutineDetailScreen = ({ route, navigation }) => {
           {exercise}
         </Text>
       ))}
-      {/* <Button title="Go back" onPress={goBack} /> */}
-      <Button title="Delete Routine" onPress={handleDelete} />
+      <TouchableOpacity 
+        style={styles.textWrapper}
+        onPress={handleDelete}
+      >
+        <Text style={styles.buttonText}>Delete Routine</Text>
+      </TouchableOpacity>
       <Ionicons
         name="arrow-back-outline"
         size={24}
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     color: '#fdfbf6',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 15,
   },
   exercise: {
     color: 'white',
@@ -68,6 +72,25 @@ const styles = StyleSheet.create({
     top: 32,
     left: 18,
   },
+  textWrapper: {
+    width: '35%',
+    backgroundColor: '#a37cf4',
+    padding: 3,
+    paddingVertical: 1,
+    borderRadius: 20,
+    marginBottom: 12,
+    marginTop: 15,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#fdfbf6',
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginTop: 10,
+  },    
 });
 
 export default RoutineDetailScreen;
